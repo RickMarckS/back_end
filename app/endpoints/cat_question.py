@@ -22,14 +22,6 @@ def get_gato_por_id(id: int):
 # Método que retorna a lista de gatos sem data de nascimento e sem idade
 @router.get("/gato")
 def get_gatos():
-    """_summary_
-
-    Raises:
-        HTTPException: _description_
-
-    Returns:
-        _type_: _description_
-    """
     try:
         gatos_sem_data_nascimento = []
         for gato in lista_gatos:
@@ -91,7 +83,7 @@ def buscar_gatos_por_nome(termo_busca: str = Body(...)):
 
 
 # Método que busca gatos por raça
-@router.get("/buscar-raca")
+@router.post("/buscar-raca")
 def buscar_gatos_por_raca(termo_busca: str = Body(...)):
     try:
         gatos_encontrados = [gato.__dict__ for gato in lista_gatos if gato.raca.lower() == termo_busca.lower()]
