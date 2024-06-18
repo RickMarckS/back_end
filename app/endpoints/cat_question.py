@@ -17,7 +17,7 @@ def get_gato_por_id(id: int):
             'data_nascimento': data_nascimento.strftime('%Y-%m-%d')
         }
     except Exception as e:
-        return HTTPException(status_code=500, detail="Internal Server Error")
+        raise HTTPException(status_code=500, detail="Internal Server Error")
     
 # Método que retorna a lista de gatos sem data de nascimento e sem idade
 @router.get("/gato")
@@ -61,7 +61,7 @@ def get_gatos_mais_velhos():
         
         return gatos_mais_velhos
     except Exception as e:
-        return HTTPException(status_code=500, detail="Internal Server Error")
+        raise HTTPException(status_code=500, detail="Internal Server Error")
 
 # Método que busca gatos por um termo de busca no nome
 @router.post("/buscar-gatos")
@@ -89,4 +89,4 @@ def buscar_gatos_por_raca(termo_busca: str = Body(...)):
         gatos_encontrados = [gato.__dict__ for gato in lista_gatos if gato.raca.lower() == termo_busca.lower()]
         return {'gatos_encontrados': gatos_encontrados}
     except Exception as e:
-        return HTTPException(status_code=500, detail="Internal Server Error")
+        raise HTTPException(status_code=500, detail="Internal Server Error")
