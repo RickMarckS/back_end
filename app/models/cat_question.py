@@ -32,22 +32,27 @@ lista_gatos = [
 ]
 
 datas_nascimento = [
-    {'id': 1, 'data_nascimento': datetime(2021, 5, 1)},
-    {'id': 2, 'data_nascimento': datetime(2020, 4, 15)},
-    {'id': 3, 'data_nascimento': datetime(2019, 3, 20)},
-    {'id': 4, 'data_nascimento': datetime(2018, 2, 10)},
-    {'id': 5, 'data_nascimento': datetime(2017, 1, 5)},
-    {'id': 6, 'data_nascimento': datetime(2022, 6, 25)},
-    {'id': 9, 'data_nascimento': datetime(2019, 3, 18)},
-    ('id: 31, data_nascimento: datetime(2018, 2, 9'),
-    {'id': 10, 'data_nascimento': datetime(2018, 2, 11)},
-    {'id': 11, 'data_nascimento': datetime(2022, 7, 3)},
-    {'id': 12, 'data_nascimento': datetime(2021, 5, 28)},
-    {'id': 13, 'data_nascimento': datetime(2020, 4, 13)},
-    {'id': 16, 'data_nascimento': datetime(2017, 1, 7)},
-    {'id': 17, 'data_nascimento': datetime(2021, 5, 2)},
-    ('id: 31', 'data_nascimento: datetime(2018, 2, 9'),
-    {'id': 18, 'data_nascimento': datetime(2020, 4, 14)},
-    {'id': 19, 'data_nascimento': datetime(2019, 3, 19)},
-    {'id': 20, 'data_nascimento': datetime(2018, 2, 9)},
+    {'id': 1, 'data_nascimento': datetime(2021, 5, 1)},     
+    {'id': 2, 'data_nascimento': datetime(2020, 4, 15)},    
+    {'id': 3, 'data_nascimento': datetime(2019, 3, 20)},    
+    {'id': 4, 'data_nascimento': datetime(2018, 2, 10)},    
+    {'id': 5, 'data_nascimento': datetime(2017, 1, 5)},     
+    {'id': 6, 'data_nascimento': datetime(2022, 6, 25)},    
+    {'id': 7, 'data_nascimento': datetime(2019, 3, 18)},    
+    {'id': 8, 'data_nascimento': datetime(2018, 2, 9)},     
+    {'id': 9, 'data_nascimento': datetime(2018, 2, 11)},    
+    {'id': 10, 'data_nascimento': datetime(2022, 7, 3)},    
+    {'id': 11, 'data_nascimento': datetime(2021, 5, 28)},   
+    {'id': 12, 'data_nascimento': datetime(2020, 4, 13)},   
+    {'id': 13, 'data_nascimento': datetime(2017, 1, 7)},    
+    {'id': 14, 'data_nascimento': datetime(2021, 5, 2)},    
+    {'id': 15, 'data_nascimento': datetime(2018, 2, 9)},    
+    {'id': 16, 'data_nascimento': datetime(2020, 4, 14)},   
+    {'id': 17, 'data_nascimento': datetime(2019, 3, 19)},   
+    {'id': 18, 'data_nascimento': datetime(2018, 2, 9)},    
 ]
+
+#ajeitar as datas (já)
+#ajeitar idades (já)
+#ajeitar tipos (já)
+#aqui tá tudo ok
