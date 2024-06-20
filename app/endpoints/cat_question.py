@@ -5,8 +5,12 @@ router = APIRouter()
 
 class GatoNome(BaseModel):
     nome:str
+
+
 class GatoRaca(BaseModel):
     raca:str
+
+
 # Método que recebe um ID e retorna os dados do gato e sua data de nascimento
 @router.get("/gato/{id}")
 def get_gato_por_id(id: int):
@@ -76,49 +80,61 @@ def get_gatos_mais_velhos():
     except HTTPException as er:
         raise er
     except Exception as e:
-        raise HTTPException(status_code=500, detail="Internal Server Error") #erro pra falta de data?
+        raise HTTPException(status_code=500, detail="Internal Server Error")
 
 # Método que busca gatos por um termo de busca no nome
-@router.post("/buscar-gatos", response_model=GatoNome)
+@router.post("/buscar-gatos")
 def buscar_gatos_por_nome(termo_busca: GatoNome = Body(...)):
-    print(termo_busca)
     try:
-        # Transforma a lista de gatos em um dicionário onde as chaves são os IDs
-        dict_gatos = {gato.id: gato for gato in lista_gatos}
-        
         gatos_encontrados = []
-        for gato_id, gato in dict_gatos.items():
-            if termo_busca.nome.lower() in gato.nome.lower():                
-                # Adiciona o gato encontrado ao resultado, excluindo o atributo idade
-                gatos_encontrados.append(gato)
-
-        if not gatos_encontrados: #verifica se encontrou algum gato e retorna um erro ao invés do array vazio
+        for gato in lista_gatos:
+            if gato.nome.lower() == termo_busca.nome.lower():
+                # Encontrar a data de nascimento do gato
+                data_nascimento = next((d['data_nascimento'] for d in datas_nascimento if d['id'] == gato.id), None)
+                
+                if data_nascimento is None:
+                    raise HTTPException(status_code=422, detail="Data de nascimento não encontrada para o gato com esse nome")
+                
+                # Adicionar o gato com sua data de nascimento
+                gatos_encontrados.append({
+                    'id': gato.id,
+                    'nome': gato.nome,
+                    'raca': gato.raca,
+                    'idade': gato.idade,
+                    'data_nascimento': data_nascimento
+                })   
+        if not gatos_encontrados: # erro se o array estiver vazio
             raise HTTPException(status_code=404, detail="Nenhum gato com esse nome foi encontrado")
         return {'gatos_encontrados': gatos_encontrados}
     except HTTPException as er:
         raise er
-    except Exception as e: #erro pra qualquer outra coisa
-            raise HTTPException(status_code=500, detail="Internal Server Error")
+    except Exception as e: # erro de qualquer outra coisa
+        raise HTTPException(status_code=500, detail="Erro interno do servidor")
 
-
-# Método que busca gatos por raça
-@router.post("/buscar-raca", response_model=GatoRaca)
+@router.post("/buscar-raca")
 def buscar_gatos_por_raca(termo_busca: GatoRaca = Body(...)):
     try:
-        gatos_encontrados = [gato.__dict__ for gato in lista_gatos if gato.raca.lower() == termo_busca.raca.lower()]
-        if not gatos_encontrados: #erro se o array estiver vazio
+        gatos_encontrados = []
+        for gato in lista_gatos:
+            if gato.raca.lower() == termo_busca.raca.lower():
+                # Encontrar a data de nascimento do gato
+                data_nascimento = next((d['data_nascimento'] for d in datas_nascimento if d['id'] == gato.id), None)
+                
+                if data_nascimento is None:
+                    raise HTTPException(status_code=422, detail="Data de nascimento não encontrada para o gato com esse raça")
+                
+                # Adicionar o gato com sua data de nascimento
+                gatos_encontrados.append({
+                    'id': gato.id,
+                    'nome': gato.nome,
+                    'raca': gato.raca,
+                    'idade': gato.idade,
+                    'data_nascimento': data_nascimento
+                })   
+        if not gatos_encontrados: # erro se o array estiver vazio
             raise HTTPException(status_code=404, detail="Nenhum gato dessa raça foi encontrado")
-            
         return {'gatos_encontrados': gatos_encontrados}
     except HTTPException as er:
         raise er
-    except Exception as e:#erro de qualquer outra coisa
+    except Exception as e: # erro de qualquer outra coisa
         raise HTTPException(status_code=500, detail="Erro interno do servidor")
-    
-    
-
-#Ajeitar os return para raise nos erros (já)
-#Ajeitar os post e get (já)
-#Ajeitar os números dos erros (já)
-#implementar erros (já)
-#tentar tratar erros de maneira automatica
